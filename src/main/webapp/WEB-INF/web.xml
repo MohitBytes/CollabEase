@@ -40,6 +40,16 @@
         <servlet-class>com.collabease.controller.ProjectServlet</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>TaskServlet</servlet-name>
+        <servlet-class>com.collabease.controller.TaskServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>MemberServlet</servlet-name>
+        <servlet-class>com.collabease.controller.MemberServlet</servlet-class>
+    </servlet>
+
 
     <!--servlet mapping-->
 
@@ -66,6 +76,16 @@
     <servlet-mapping>
         <servlet-name>ProjectServlet</servlet-name>
         <url-pattern>/Manager/ProjectServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>TaskServlet</servlet-name>
+        <url-pattern>/Manager/TaskServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>MemberServlet</servlet-name>
+        <url-pattern>/Member/MemberServlet</url-pattern>
     </servlet-mapping>
 
 </web-app>

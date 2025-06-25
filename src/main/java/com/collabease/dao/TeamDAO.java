@@ -51,4 +51,23 @@ public class TeamDAO {
 
         return teams;
     }
+
+    public int getTotalTeams() {
+        String sql = "SELECT COUNT(*) AS total FROM teams";
+
+        try {
+
+            Connection conn = DBConnection.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("total");  // Fetch the "total" column
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return 0;
+    }
+
 }
