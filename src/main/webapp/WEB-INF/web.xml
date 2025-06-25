@@ -30,6 +30,16 @@
         <servlet-class>com.collabease.controller.LogoutServlet</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>TeamServlet</servlet-name>
+        <servlet-class>com.collabease.controller.TeamServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>ProjectServlet</servlet-name>
+        <servlet-class>com.collabease.controller.ProjectServlet</servlet-class>
+    </servlet>
+
 
     <!--servlet mapping-->
 
@@ -46,6 +56,16 @@
     <servlet-mapping>
         <servlet-name>LogoutServlet</servlet-name>
         <url-pattern>/signin/LogoutServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>TeamServlet</servlet-name>
+        <url-pattern>/Manager/TeamServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ProjectServlet</servlet-name>
+        <url-pattern>/Manager/ProjectServlet</url-pattern>
     </servlet-mapping>
 
 </web-app>
