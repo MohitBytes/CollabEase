@@ -75,6 +75,16 @@
         <servlet-class>com.collabease.controller.NotificationBulkServlet</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>ManageSection</servlet-name>
+        <servlet-class>com.collabease.controller.ManageSectionServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>EditEntityServlet</servlet-name>
+        <servlet-class>com.collabease.controller.EditEntityServlet</servlet-class>
+    </servlet>
+
     <!--servlet mapping-->
 
     <servlet-mapping>
@@ -135,5 +145,15 @@
     <servlet-mapping>
         <servlet-name>NotificationBulkServlet</servlet-name>
         <url-pattern>/NotificationBulkServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ManageSection</servlet-name>
+        <url-pattern>/ManageSection</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>EditEntityServlet</servlet-name>
+        <url-pattern>/EditEntityServlet</url-pattern>
     </servlet-mapping>
 </web-app>

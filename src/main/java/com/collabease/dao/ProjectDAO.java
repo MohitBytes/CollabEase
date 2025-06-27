@@ -246,5 +246,47 @@ public class ProjectDAO {
         return progressMap;
     }
 
+    public void updateProject(int projectId, String projectName) {
+        String sql = "UPDATE projects SET projectName = ? WHERE projectId = ?";
+        try {
+
+            Connection conn = DBConnection.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, projectName);
+            stmt.setInt(2, projectId);
+            stmt.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public Project getProjectById(int id) {
+        Project project = null;
+        String sql = "SELECT * FROM projects WHERE projectId = ?";
+
+        try {
+
+            Connection conn = DBConnection.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                project = new Project();
+                project.setProjectId(rs.getInt("project_id"));
+                project.setProjectName(rs.getString("project_name"));
+                project.setDescription(rs.getString("description"));
+                project.setTeamId(rs.getInt("team_id"));
+                project.setDeadline(rs.getDate("deadline"));
+                project.setStatus(rs.getString("status"));
+                project.setCreatedAt(rs.getTimestamp("createdAt"));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return project;
+    }
 
 }

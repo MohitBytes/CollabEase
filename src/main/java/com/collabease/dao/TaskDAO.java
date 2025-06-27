@@ -319,4 +319,54 @@ public class TaskDAO {
         return tasks;
     }
 
+    public void updateTask(int taskId, String title, String assignedTo, String status, java.sql.Date deadline) {
+        String sql = "UPDATE tasks SET title = ?, assignedTo = ?, status = ?, deadline = ? WHERE taskId = ?";
+        try {
+
+            Connection conn = DBConnection.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, title);
+            stmt.setString(2, assignedTo);
+            stmt.setString(3, status);
+            stmt.setDate(4, deadline);
+            stmt.setInt(5, taskId);
+            stmt.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public Task getTaskById(int id) {
+        Task task = null;
+        String sql = "SELECT * FROM tasks WHERE taskId = ?";
+
+        try {
+
+            Connection conn = DBConnection.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                task = new Task();
+                task.setTaskId(rs.getInt("taskId"));
+                task.setTitle(rs.getString("title"));
+                task.setDescription(rs.getString("description"));
+                task.setProjectId(rs.getInt("project_id"));
+                task.setAssignedTo(rs.getInt("assigned_to"));
+                task.setCreatedBy(rs.getInt("created_by"));
+                task.setCreatedAt(rs.getTimestamp("created_at"));
+                task.setStatus(rs.getString("status"));
+                task.setDeadline(rs.getTimestamp("deadline"));
+                task.setDeadline(rs.getTimestamp("deadline"));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return task;
+    }
+
+
 }

@@ -12,6 +12,19 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <style>
+        .dashboard-card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            cursor: pointer;
+        }
+        .dashboard-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            z-index: 2;
+        }
+    </style>
+
 </head>
 <body>
 
@@ -24,50 +37,57 @@
         <div class="row mb-4">
             <!-- Projects -->
             <div class="col-md-3">
-                <div class="card text-white bg-primary">
-                    <div class="card-body">
-                        <h5 class="card-title">Projects</h5>
-                        <p class="card-text display-4">${totalProjects}</p>
-                        <p>${activeProjects} active</p>
+                <a href="ManageSection?type=projects" class="text-decoration-none">
+                    <div class="card text-white bg-primary dashboard-card">
+                        <div class="card-body">
+                            <h5 class="card-title">Projects</h5>
+                            <p class="card-text display-4">${totalProjects}</p>
+                            <p>${activeProjects} active</p>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
             <!-- Teams -->
             <div class="col-md-3">
-                <div class="card text-white bg-success">
-                    <div class="card-body">
-                        <h5 class="card-title">Teams</h5>
-                        <p class="card-text display-4">${totalTeams}</p>
+                <a href="ManageSection?type=teams" class="text-decoration-none">
+                    <div class="card text-white bg-success dashboard-card">
+                        <div class="card-body">
+                            <h5 class="card-title">Teams</h5>
+                            <p class="card-text display-4">${totalTeams}</p>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
             <!-- Users -->
             <div class="col-md-3">
-                <div class="card text-white bg-info">
-                    <div class="card-body">
-                        <h5 class="card-title">Users</h5>
-                        <p class="card-text display-4">${totalUsers}</p>
+                <a href="ManageSection?type=users" class="text-decoration-none">
+                    <div class="card text-white bg-info dashboard-card">
+                        <div class="card-body">
+                            <h5 class="card-title">Users</h5>
+                            <p class="card-text display-4">${totalUsers}</p>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
             <!-- Tasks -->
             <div class="col-md-3">
-                <div class="card text-white bg-warning">
-                    <div class="card-body">
-                        <h5 class="card-title">Tasks</h5>
-                        <p class="card-text display-4">
-                            <c:set var="totalTasks" value="0" />
-                            <c:if test="${not empty taskDistribution}">
-                                <c:forEach items="${taskDistribution}" var="entry">
-                                    <c:set var="totalTasks" value="${totalTasks + entry.value}" />
-                                </c:forEach>
-                            </c:if>
-                            ${totalTasks}
-                        </p>
+                <a href="ManageSection?type=tasks" class="text-decoration-none">
+                    <div class="card text-white bg-warning dashboard-card">
+                        <div class="card-body">
+                            <h5 class="card-title">Tasks</h5>
+                            <p class="card-text display-4">
+                                <c:set var="totalTasks" value="0" />
+                                <c:if test="${not empty taskDistribution}">
+                                    <c:forEach items="${taskDistribution}" var="entry">
+                                        <c:set var="totalTasks" value="${totalTasks + entry.value}" />
+                                    </c:forEach>
+                                </c:if>
+                                ${totalTasks}
+                            </p>
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
-        </div>
 
         <!-- Charts Row -->
         <div class="row mb-4">

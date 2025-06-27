@@ -131,4 +131,47 @@ public class UserDAO {
         return users;
     }
 
+    public void updateUser(int userId, String fullName, String email, String role) {
+        String sql = "UPDATE users SET fullName = ?, email = ?, role = ? WHERE userId = ?";
+        try {
+
+            Connection conn = DBConnection.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, fullName);
+            stmt.setString(2, email);
+            stmt.setString(3, role);
+            stmt.setInt(4, userId);
+            stmt.executeUpdate();
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public User getUserById(int id) {
+        User user = null;
+        String sql = "SELECT * FROM users WHERE userId = ?";
+
+        try {
+
+            Connection conn = DBConnection.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                user = new User();
+                user.setUserId(rs.getInt("user_id"));
+                user.setFullName(rs.getString("full_name"));
+                user.setEmail(rs.getString("email"));
+                user.setRole(rs.getString("role"));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
+
+
 }
