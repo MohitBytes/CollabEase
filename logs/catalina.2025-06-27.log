@@ -372,3 +372,38 @@
  java.base/java.lang.Thread.run(Thread.java:1575)
 27-Jun-2025 15:03:36.439 INFO [Thread-2] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler ["http-nio-8080"]
 27-Jun-2025 15:03:36.448 INFO [Thread-2] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler ["http-nio-8080"]
+27-Jun-2025 15:03:40.420 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version name:   Apache Tomcat/9.0.104
+27-Jun-2025 15:03:40.427 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:          Apr 4 2025 12:32:55 UTC
+27-Jun-2025 15:03:40.427 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version number: 9.0.104.0
+27-Jun-2025 15:03:40.428 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Name:               Windows 11
+27-Jun-2025 15:03:40.428 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Version:            10.0
+27-Jun-2025 15:03:40.428 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture:          amd64
+27-Jun-2025 15:03:40.428 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Java Home:             C:\Users\akshat\.jdks\valhalla-ea-23
+27-Jun-2025 15:03:40.430 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Version:           23-valhalla+1-90
+27-Jun-2025 15:03:40.430 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Vendor:            Oracle Corporation
+27-Jun-2025 15:03:40.432 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:         A:\Office 2025 Projects\CollabEase
+27-Jun-2025 15:03:40.433 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:         C:\Program Files\Apache Software Foundation\Tomcat 9.0_Tomcat9_Temp
+27-Jun-2025 15:03:40.441 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.lang=ALL-UNNAMED
+27-Jun-2025 15:03:40.441 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.io=ALL-UNNAMED
+27-Jun-2025 15:03:40.442 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.util=ALL-UNNAMED
+27-Jun-2025 15:03:40.442 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.base/java.util.concurrent=ALL-UNNAMED
+27-Jun-2025 15:03:40.442 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: --add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED
+27-Jun-2025 15:03:40.442 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.home=C:\Program Files\Apache Software Foundation\Tomcat 9.0_Tomcat9_Temp
+27-Jun-2025 15:03:40.442 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.base=A:\Office 2025 Projects\CollabEase
+27-Jun-2025 15:03:40.442 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.io.tmpdir=A:\Office 2025 Projects\CollabEase\temp
+27-Jun-2025 15:03:40.443 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.config.file=A:\Office 2025 Projects\CollabEase\conf\logging.properties
+27-Jun-2025 15:03:40.443 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+27-Jun-2025 15:03:40.445 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -javaagent:C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2024.3.5\lib\idea_rt.jar=61775
+27-Jun-2025 15:03:40.445 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dfile.encoding=UTF-8
+27-Jun-2025 15:03:40.445 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dsun.stdout.encoding=UTF-8
+27-Jun-2025 15:03:40.445 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dsun.stderr.encoding=UTF-8
+27-Jun-2025 15:03:40.453 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent The Apache Tomcat Native library which allows using OpenSSL was not found on the java.library.path: [C:\Users\akshat\.jdks\valhalla-ea-23\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\redist\intel64\compiler;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Common Files\Oracle\Java\java8path;C:\Program Files\Java\jdk-24\bin;C:\Program Files\Java\jdk-1.8\bin;C:\Program Files\Python310\Scripts\;C:\Program Files\Python310\;C:\Users\akshat\Downloads\WINDOWS.X64_193000_db_home\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\dotnet\;C:\MinGW\bin;C:\Program Files\Wondershare\Wondershare DemoCreator;C:\Program Files\nodejs\;C:\Program Files\Git\cmd;C:\Program Files\MySQL\MySQL Server 8.0\bin;C:\Office 2025\Maven\apache-maven-3.9.9\bin;%JAVA_HOME%\bin;C:\Program Files\MySQL\MySQL Shell 8.0\bin\;C:\Users\akshat\AppData\Local\Programs\Eclipse Adoptium\jdk-17.0.6.10-hotspot\bin;C:\Users\akshat\AppData\Local\Programs\Python\Python310\Scripts\;C:\Users\akshat\AppData\Local\Programs\Python\Python310\;C:\Users\akshat\AppData\Local\Programs\Python\Python311\Scripts\;C:\Users\akshat\AppData\Local\Programs\Python\Python311\;C:\Users\akshat\AppData\Local\Microsoft\WindowsApps;C:\Users\akshat\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\akshat\AppData\Roaming\npm;C:\Users\akshat\AppData\Local\GitHubDesktop\bin;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2024.3.5\bin;;C:\Program Files\Java\jdk-24\bin;;.]
+27-Jun-2025 15:03:40.903 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["http-nio-8080"]
+27-Jun-2025 15:03:40.929 INFO [main] org.apache.catalina.startup.Catalina.load Server initialization in [786] milliseconds
+27-Jun-2025 15:03:41.018 INFO [main] org.apache.catalina.core.StandardService.startInternal Starting service [Catalina]
+27-Jun-2025 15:03:41.019 INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet engine: [Apache Tomcat/9.0.104]
+27-Jun-2025 15:03:41.033 INFO [main] org.apache.catalina.startup.HostConfig.deployDescriptor Deploying deployment descriptor [A:\Office 2025 Projects\CollabEase\conf\Catalina\localhost\CollabEase.xml]
+27-Jun-2025 15:03:42.023 INFO [main] org.apache.jasper.servlet.TldScanner.scanJars At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+27-Jun-2025 15:03:42.129 INFO [main] org.apache.catalina.startup.HostConfig.deployDescriptor Deployment of deployment descriptor [A:\Office 2025 Projects\CollabEase\conf\Catalina\localhost\CollabEase.xml] has finished in [1,095] ms
+27-Jun-2025 15:03:42.133 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-8080"]
+27-Jun-2025 15:03:42.165 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in [1234] milliseconds
