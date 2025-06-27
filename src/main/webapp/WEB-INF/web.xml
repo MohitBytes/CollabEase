@@ -65,6 +65,15 @@
         <servlet-class>com.collabease.controller.NotificationServlet</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>AllNotificationServlet</servlet-name>
+        <servlet-class>com.collabease.controller.AllNotificationServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>NotificationBulkServlet</servlet-name>
+        <servlet-class>com.collabease.controller.NotificationBulkServlet</servlet-class>
+    </servlet>
 
     <!--servlet mapping-->
 
@@ -118,4 +127,13 @@
         <url-pattern>/NotificationServlet</url-pattern>
     </servlet-mapping>
 
+    <servlet-mapping>
+        <servlet-name>AllNotificationServlet</servlet-name>
+        <url-pattern>/AllNotificationServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>NotificationBulkServlet</servlet-name>
+        <url-pattern>/NotificationBulkServlet</url-pattern>
+    </servlet-mapping>
 </web-app>

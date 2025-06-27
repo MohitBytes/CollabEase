@@ -123,6 +123,24 @@
         </div>
     </div>
 
+    <!-- Notification Modal -->
+    <div class="modal fade" id="notificationModal" tabindex="-1" aria-labelledby="notificationModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="notificationModalLabel">Notification</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body" id="notificationModalBody">
+            <!-- JS will inject notification content -->
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Task Status Chart JS -->
     <script>
         const statusCtx = document.getElementById('taskStatusChart').getContext('2d');
@@ -141,53 +159,7 @@
             }
         });
     </script>
-
-    <!-- Notifications JS -->
-    <script>
-        $(document).ready(function() {
-            loadNotifications();
-            setInterval(loadNotifications, 30000); // every 30 seconds
-
-            function loadNotifications() {
-                $.get('${pageContext.request.contextPath}/NotificationServlet', function(notifications) {
-                    $('#notificationCount').text(notifications.length);
-                    if (notifications.length > 0) {
-                        let html = '';
-                        notifications.forEach(notif => {
-                            html += `
-                                <li>
-                                    <a class="dropdown-item notification-item" href="#" data-id="\${notif.notificationId}">
-                                        <div class="small text-muted">\${formatTime(notif.createdAt)}</div>
-                                        \${notif.message}
-                                    </a>
-                                </li>
-                            `;
-                        });
-                        html += `
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item text-center" href="#">Mark all as read</a></li>
-                        `;
-                        $('#notificationList').html(html);
-                    } else {
-                        $('#notificationList').html('<li><a class="dropdown-item" href="#">No notifications</a></li>');
-                    }
-
-                    $('.notification-item').click(function() {
-                        const notificationId = $(this).data('id');
-                        $.post('${pageContext.request.contextPath}/notifications', { notificationId: notificationId });
-                        $(this).closest('li').remove();
-                    });
-                });
-            }
-
-            function formatTime(timestamp) {
-                const date = new Date(timestamp);
-                return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-            }
-        });
-    </script>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>

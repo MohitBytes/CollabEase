@@ -29,9 +29,25 @@ public class NotificationServlet extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
 
-        int notificationId = Integer.parseInt(request.getParameter("notificationId"));
-        new NotificationDAO().markAsRead(notificationId);
-        response.getWriter().print("success");
+        String action = request.getParameter("action");
+
+        try {
+            NotificationDAO dao = new NotificationDAO();
+
+            if ("markAllRead".equals(action)) {
+                boolean result = dao.markAllAsRead(user.getUserId());
+                response.getWriter().print(result ? "success" : "fail");
+            } else {
+                int notificationId = Integer.parseInt(request.getParameter("notificationId"));
+                dao.markAsRead(notificationId);
+                response.getWriter().print("success");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        }
     }
 }

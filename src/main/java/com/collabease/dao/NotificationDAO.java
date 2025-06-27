@@ -53,7 +53,7 @@ public class NotificationDAO {
     }
 
     public boolean markAsRead(int notificationId) {
-        String sql = "UPDATE notifications SET is_read = true WHERE notification_id = ?";
+        String sql = "UPDATE notifications SET is_read = 1 WHERE notification_id = ?";
         try {
             Connection conn = DBConnection.getConnection();
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -63,6 +63,31 @@ public class NotificationDAO {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public boolean markAllAsRead(int userId) {
+        String sql = "UPDATE notifications SET is_read = true WHERE user_id = ?";
+        try {
+            Connection conn = DBConnection.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, userId);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public void clearAllNotifications(int userId) {
+        String sql = "DELETE FROM notifications WHERE user_id = ?";
+        try {
+            Connection conn = DBConnection.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, userId);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     public boolean notificationExists(int relatedId, String type, int userId) {
@@ -86,4 +111,31 @@ public class NotificationDAO {
         }
         return false;
     }
+
+    public List<Notification> getAllNotifications(int userId) {
+        List<Notification> notifications = new ArrayList<>();
+        String sql = "SELECT * FROM notifications WHERE user_id = ? ORDER BY created_at DESC";
+        try {
+
+            Connection conn = DBConnection.getConnection();
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setInt(1, userId);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                Notification notification = new Notification();
+                notification.setNotificationId(rs.getInt("notification_id"));
+                notification.setUserId(rs.getInt("user_id"));
+                notification.setMessage(rs.getString("message"));
+                notification.setType(rs.getString("type"));
+                notification.setRelatedId(rs.getInt("related_id"));
+                notification.setCreatedAt(rs.getTimestamp("created_at"));
+                notification.setRead(rs.getBoolean("is_read"));
+                notifications.add(notification);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return notifications;
+    }
+
 }
