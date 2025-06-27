@@ -210,4 +210,41 @@ public class ProjectDAO {
         return projects;
     }
 
+    public Map<String, Double> getUserProjectProgress(int userId) {
+        Map<String, Double> progressMap = new HashMap<>();
+        String sql =
+                "SELECT p.project_name, " +
+                        "SUM(CASE WHEN t.status = 'COMPLETED' THEN 1 ELSE 0 END) AS completed_tasks, " +
+                        "COUNT(t.task_id) AS total_tasks " +
+                        "FROM tasks t " +
+                        "JOIN projects p ON t.project_id = p.project_id " +
+                        "WHERE t.assigned_to = ? " +
+                        "GROUP BY p.project_name";
+
+        try {
+
+            Connection con = DBConnection.getConnection();
+            PreparedStatement stmt = con.prepareStatement(sql);
+            stmt.setInt(1, userId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    String projectName = rs.getString("project_name");
+                    int completedTasks = rs.getInt("completed_tasks");
+                    int totalTasks = rs.getInt("total_tasks");
+
+                    double progress = (totalTasks > 0)
+                            ? (completedTasks * 100.0 / totalTasks)
+                            : 0.0;
+
+                    progressMap.put(projectName, progress);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return progressMap;
+    }
+
+
 }

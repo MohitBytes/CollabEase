@@ -50,6 +50,21 @@
         <servlet-class>com.collabease.controller.MemberServlet</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>AdminDashboardServlet</servlet-name>
+        <servlet-class>com.collabease.controller.AdminDashboardServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>ReportServlet</servlet-name>
+        <servlet-class>com.collabease.controller.ReportServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>NotificationServlet</servlet-name>
+        <servlet-class>com.collabease.controller.NotificationServlet</servlet-class>
+    </servlet>
+
 
     <!--servlet mapping-->
 
@@ -86,6 +101,21 @@
     <servlet-mapping>
         <servlet-name>MemberServlet</servlet-name>
         <url-pattern>/Member/MemberServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>AdminDashboardServlet</servlet-name>
+        <url-pattern>/AdminDashboardServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ReportServlet</servlet-name>
+        <url-pattern>/ReportServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>NotificationServlet</servlet-name>
+        <url-pattern>/NotificationServlet</url-pattern>
     </servlet-mapping>
 
 </web-app>

@@ -132,7 +132,8 @@ public class TaskDAO {
             Connection conn = DBConnection.getConnection();
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setTimestamp(1, beforeTime);
-            try (ResultSet rs = pstmt.executeQuery()) {
+            try {
+                ResultSet rs = pstmt.executeQuery();
                 while (rs.next()) {
                     Task task = new Task();
                     task.setTaskId(rs.getInt("task_id"));
@@ -147,6 +148,8 @@ public class TaskDAO {
                     task.setStatus(rs.getString("status"));
                     tasks.add(task);
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -184,7 +187,8 @@ public class TaskDAO {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setInt(1, limit);
 
-            try (ResultSet rs = stmt.executeQuery()) {
+            try {
+                ResultSet rs = stmt.executeQuery();
                 while (rs.next()) {
                     Task task = new Task();
                     task.setTaskId(rs.getInt("task_id"));
@@ -201,6 +205,8 @@ public class TaskDAO {
 
                     tasks.add(task);
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -225,7 +231,8 @@ public class TaskDAO {
             stmt.setInt(1, managerId);
             stmt.setInt(2, days);
 
-            try (ResultSet rs = stmt.executeQuery()) {
+            try {
+                ResultSet rs = stmt.executeQuery();
                 while (rs.next()) {
                     Task task = new Task();
                     task.setTaskId(rs.getInt("task_id"));
@@ -242,6 +249,8 @@ public class TaskDAO {
 
                     tasks.add(task);
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -266,10 +275,13 @@ public class TaskDAO {
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setInt(1, managerId);
 
-            try (ResultSet rs = stmt.executeQuery()) {
+            try {
+                ResultSet rs = stmt.executeQuery();
                 while (rs.next()) {
                     distribution.put(rs.getString("full_name"), rs.getInt("task_count"));
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         } catch (Exception e) {
             e.printStackTrace();

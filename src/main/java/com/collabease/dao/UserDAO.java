@@ -110,10 +110,11 @@ public class UserDAO {
         List<User> users = new ArrayList<>();
         String sql = "SELECT user_id, full_name, email, role FROM users";
 
-        try (Connection con = DBConnection.getConnection();
-             PreparedStatement stmt = con.prepareStatement(sql);
-             ResultSet rs = stmt.executeQuery()) {
+        try {
 
+            Connection con = DBConnection.getConnection();
+            PreparedStatement stmt = con.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 User user = new User();
                 user.setUserId(rs.getInt("user_id"));
@@ -123,7 +124,7 @@ public class UserDAO {
 
                 users.add(user);
             }
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

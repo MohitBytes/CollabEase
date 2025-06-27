@@ -75,8 +75,11 @@ public class NotificationDAO {
             pstmt.setString(2, type);
             pstmt.setInt(3, userId);
 
-            try (ResultSet rs = pstmt.executeQuery()) {
+            try {
+                ResultSet rs = pstmt.executeQuery();
                 return rs.next(); // returns true if there is a record
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         } catch (SQLException e) {
             e.printStackTrace();

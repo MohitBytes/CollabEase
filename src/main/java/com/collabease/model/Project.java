@@ -1,6 +1,7 @@
 package com.collabease.model;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class Project {
     private int projectId;
@@ -9,14 +10,16 @@ public class Project {
     private int teamId;
     private Date deadline;
     private String status;
+    private Timestamp createdAt;
 
-    public Project(int projectId, String projectName, String description, int teamId, Date deadline, String status) {
+    public Project(int projectId, String projectName, String description, int teamId, Date deadline, String status, Timestamp createdAt) {
         this.projectId = projectId;
         this.projectName = projectName;
         this.description = description;
         this.teamId = teamId;
         this.deadline = deadline;
         this.status = status;
+        this.createdAt = createdAt;
     }
 
     public Project() {
@@ -68,5 +71,13 @@ public class Project {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Timestamp getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Timestamp createdAt) {
+        this.createdAt = createdAt;
     }
 }
