@@ -26,7 +26,6 @@ public class ProjectServlet extends HttpServlet {
         request.getRequestDispatcher("../Manager/projects.jsp").forward(request, response);
 
     }
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String projectName = request.getParameter("projectName");
         String description = request.getParameter("description");
@@ -40,7 +39,6 @@ public class ProjectServlet extends HttpServlet {
         project.setTeamId(teamId);
         project.setDeadline(deadline);
         project.setStatus(status);
-
 
         ProjectDAO projectDAO = new ProjectDAO();
         if (projectDAO.createProject(project)) {

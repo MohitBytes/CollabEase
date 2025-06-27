@@ -6,12 +6,19 @@
 <html>
 <head>
     <title>Admin Dashboard</title>
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        .clickable-card {
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .clickable-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+    </style>
 </head>
 <body>
 
@@ -24,7 +31,7 @@
         <div class="row mb-4">
             <!-- Projects -->
             <div class="col-md-3">
-                <div class="card text-white bg-primary">
+                <div class="card text-white bg-primary clickable-card" onclick="redirectTo('projects.jsp')">
                     <div class="card-body">
                         <h5 class="card-title">Projects</h5>
                         <p class="card-text display-4">${totalProjects}</p>
@@ -34,7 +41,7 @@
             </div>
             <!-- Teams -->
             <div class="col-md-3">
-                <div class="card text-white bg-success">
+                <div class="card text-white bg-success clickable-card" onclick="redirectTo('teams.jsp')">
                     <div class="card-body">
                         <h5 class="card-title">Teams</h5>
                         <p class="card-text display-4">${totalTeams}</p>
@@ -43,7 +50,7 @@
             </div>
             <!-- Users -->
             <div class="col-md-3">
-                <div class="card text-white bg-info">
+                <div class="card text-white bg-info clickable-card" onclick="redirectTo('users.jsp')">
                     <div class="card-body">
                         <h5 class="card-title">Users</h5>
                         <p class="card-text display-4">${totalUsers}</p>
@@ -52,7 +59,7 @@
             </div>
             <!-- Tasks -->
             <div class="col-md-3">
-                <div class="card text-white bg-warning">
+                <div class="card text-white bg-warning clickable-card" onclick="redirectTo('tasks.jsp')">
                     <div class="card-body">
                         <h5 class="card-title">Tasks</h5>
                         <p class="card-text display-4">
@@ -140,10 +147,61 @@
                 plugins: { legend: { position: 'right' } }
             }
         });
+
+        // Function to handle redirection
+        function redirectTo(section) {
+            // You can modify these URLs based on your actual routing
+            const baseUrl = '${pageContext.request.contextPath}/admin/';
+            let url;
+
+            switch(section) {
+                case 'projects':
+                    url = baseUrl + 'projects';
+                    break;
+                case 'teams':
+                    url = baseUrl + 'teams';
+                    break;
+                case 'users':
+                    url = baseUrl + 'users';
+                    break;
+                case 'tasks':
+                    url = baseUrl + 'tasks';
+                    break;
+                default:
+                    url = baseUrl;
+            }
+
+            window.location.href = url;
+        }
+
+        // Optional: Add keyboard navigation support
+        document.addEventListener('keydown', function(e) {
+            if (e.target.tagName.toLowerCase() !== 'input') {
+                switch(e.key) {
+                    case '1':
+                        redirectTo('projects');
+                        break;
+                    case '2':
+                        redirectTo('teams');
+                        break;
+                    case '3':
+                        redirectTo('users');
+                        break;
+                    case '4':
+                        redirectTo('tasks');
+                        break;
+                }
+            }
+        });
     </script>
 
     <!-- Notifications JS -->
     <script>
+
+           function redirectTo(url) {
+               window.location.href = "${pageContext.request.contextPath}/admin/" + url;
+           }
+
         $(document).ready(function() {
             loadNotifications();
             setInterval(loadNotifications, 30000); // every 30 seconds
@@ -189,5 +247,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>

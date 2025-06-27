@@ -6,6 +6,7 @@ import com.collabease.model.Team;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,6 +69,24 @@ public class TeamDAO {
         }
 
         return 0;
+    }
+
+    public List<Team> getAllTeams() throws SQLException {
+        List<Team> teams = new ArrayList<>();
+        String sql = "SELECT team_id, team_name FROM teams";
+
+        try (Connection con = DBConnection.getConnection();
+             PreparedStatement stmt = con.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                Team team = new Team();
+                team.setTeamId(rs.getInt("team_id"));
+                team.setTeamName(rs.getString("team_name"));
+                teams.add(team);
+            }
+        }
+        return teams;
     }
 
 }
