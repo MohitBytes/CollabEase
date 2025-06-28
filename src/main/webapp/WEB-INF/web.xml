@@ -56,6 +56,11 @@
     </servlet>
 
     <servlet>
+        <servlet-name>ManagerDashboardServlet</servlet-name>
+        <servlet-class>com.collabease.controller.ManagerDashboardServlet</servlet-class>
+    </servlet>
+
+    <servlet>
         <servlet-name>ReportServlet</servlet-name>
         <servlet-class>com.collabease.controller.ReportServlet</servlet-class>
     </servlet>
@@ -125,6 +130,11 @@
     <servlet-mapping>
         <servlet-name>AdminDashboardServlet</servlet-name>
         <url-pattern>/AdminDashboardServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ManagerDashboardServlet</servlet-name>
+        <url-pattern>/ManagerDashboardServlet</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>

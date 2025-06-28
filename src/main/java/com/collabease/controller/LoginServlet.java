@@ -29,7 +29,7 @@ public class LoginServlet extends HttpServlet {
                     break;
 
                 case "MANAGER":
-                    response.sendRedirect("../Manager/dashboard.jsp");
+                    response.sendRedirect("/ManagerDashboardServlet");
                     break;
 
                 default:

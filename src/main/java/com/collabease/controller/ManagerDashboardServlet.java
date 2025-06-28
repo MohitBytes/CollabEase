@@ -29,6 +29,6 @@ public class ManagerDashboardServlet extends HttpServlet {
         // Performance metrics
         request.setAttribute("teamPerformance", projectDAO.getTeamPerformanceMetrics(user.getUserId()));
 
-        request.getRequestDispatcher("/manager/dashboard.jsp").forward(request, response);
+        request.getRequestDispatcher("/Manager/dashboard.jsp").forward(request, response);
     }
 }
