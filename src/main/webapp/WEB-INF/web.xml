@@ -46,8 +46,8 @@
     </servlet>
 
     <servlet>
-        <servlet-name>MemberServlet</servlet-name>
-        <servlet-class>com.collabease.controller.MemberServlet</servlet-class>
+        <servlet-name>MemberDashboardServlet</servlet-name>
+        <servlet-class>com.collabease.controller.MemberDashboardServlet</servlet-class>
     </servlet>
 
     <servlet>
@@ -114,17 +114,22 @@
 
     <servlet-mapping>
         <servlet-name>ProjectServlet</servlet-name>
-        <url-pattern>/Manager/ProjectServlet</url-pattern>
+        <url-pattern>/ProjectServlet</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>TeamServlet</servlet-name>
+        <url-pattern>/TeamServlet</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>
         <servlet-name>TaskServlet</servlet-name>
-        <url-pattern>/Manager/TaskServlet</url-pattern>
+        <url-pattern>/TaskServlet</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>
-        <servlet-name>MemberServlet</servlet-name>
-        <url-pattern>/Member/MemberServlet</url-pattern>
+        <servlet-name>MemberDashboardServlet</servlet-name>
+        <url-pattern>/MemberDashboardServlet</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>

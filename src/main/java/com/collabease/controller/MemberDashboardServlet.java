@@ -23,7 +23,8 @@ public class MemberDashboardServlet extends HttpServlet {
 
         request.setAttribute("tasks", taskDAO.getTasksByUser(user.getUserId()));
         request.setAttribute("projectProgress", projectDAO.getUserProjectProgress(user.getUserId()));
+        request.setAttribute("overdueCount", taskDAO.getOverdueCount(user.getUserId()));
 
-        request.getRequestDispatcher("/member/dashboard.jsp").forward(request, response);
+        request.getRequestDispatcher("/Member/dashboard.jsp").forward(request, response);
     }
 }

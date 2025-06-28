@@ -133,8 +133,8 @@
             <div class="col-md-3">
                 <div class="list-group">
                     <a href="dashboard.jsp" class="list-group-item list-group-item-action">Dashboard</a>
-                    <a href="teams.jsp" class="list-group-item list-group-item-action">Manage Teams</a>
-                    <a href="projects.jsp" class="list-group-item list-group-item-action active">Manage Projects</a>
+                    <a href="TeamServlet" class="list-group-item list-group-item-action">Manage Teams</a>
+                    <a href="ProjectServlet" class="list-group-item list-group-item-action active">Manage Projects</a>
                 </div>
             </div>
 
@@ -145,7 +145,7 @@
                     </div>
                     <div class="card-body">
                         <div class="d-grid gap-2">
-                            <a href="teams.jsp" class="btn btn-primary">Create New Team</a>
+                            <a href="TeamServlet" class="btn btn-primary">Create New Team</a>
                             <a href="ProjectServlet" class="btn btn-success mt-2">Create New Project</a>
                         </div>
                     </div>

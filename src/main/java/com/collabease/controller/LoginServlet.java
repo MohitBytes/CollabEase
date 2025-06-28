@@ -29,11 +29,11 @@ public class LoginServlet extends HttpServlet {
                     break;
 
                 case "MANAGER":
-                    response.sendRedirect("/ManagerDashboardServlet");
+                    response.sendRedirect(request.getContextPath() +"/ManagerDashboardServlet");
                     break;
 
                 default:
-                    response.sendRedirect("../Member/dashboard.jsp");
+                    response.sendRedirect(request.getContextPath() +"/MemberDashboardServlet");
             }
         } else {
             request.setAttribute("error", "Invalid credentials");

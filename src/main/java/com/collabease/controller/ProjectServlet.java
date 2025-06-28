@@ -23,7 +23,7 @@ public class ProjectServlet extends HttpServlet {
         TeamDAO teamDAO = new TeamDAO();
 
         request.setAttribute("teams", teamDAO.getTeamsByManager(user.getUserId()));
-        request.getRequestDispatcher("../Manager/projects.jsp").forward(request, response);
+        request.getRequestDispatcher("/Manager/projects.jsp").forward(request, response);
 
     }
 

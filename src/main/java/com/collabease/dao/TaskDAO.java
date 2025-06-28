@@ -94,7 +94,7 @@ public class TaskDAO {
         return 0;
     }
 
-    public List<Task> getTasksByUser(int userId) {
+    public List<Task> getTaskByUser(int userId) {
         List<Task> tasks = new ArrayList<>();
         String sql = "SELECT * FROM tasks WHERE assigned_to = ?";
         try {
@@ -116,6 +116,7 @@ public class TaskDAO {
                 task.setDeadline(rs.getTimestamp("deadline"));
                 task.setPriority(rs.getString("priority"));
                 task.setStatus(rs.getString("status"));
+                task.setLastUpdated(rs.getTimestamp("last_updated"));
                 tasks.add(task);
             }
         } catch (Exception e) {
@@ -367,6 +368,89 @@ public class TaskDAO {
         }
         return task;
     }
+
+    public int getCompletedCount(int userId) {
+        int count = 0;
+        try {
+
+            Connection conn = DBConnection.getConnection();
+            PreparedStatement ps = conn.prepareStatement(
+                    "SELECT COUNT(*) FROM tasks WHERE assigned_to = ? AND status = 'COMPLETED'");
+            ps.setInt(1, userId);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) count = rs.getInt(1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
+
+    public int getInProgressCount(int userId) {
+        int count = 0;
+        try {
+
+            Connection conn = DBConnection.getConnection();
+            PreparedStatement ps = conn.prepareStatement(
+                    "SELECT COUNT(*) FROM tasks WHERE assigned_to = ? AND status = 'IN_PROGRESS'");
+            ps.setInt(1, userId);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) count = rs.getInt(1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
+
+    public int getOverdueCount(int userId) {
+        int count = 0;
+        try {
+
+            Connection conn = DBConnection.getConnection();
+            PreparedStatement ps = conn.prepareStatement(
+                    "SELECT COUNT(*) FROM tasks WHERE assigned_to = ? AND deadline < CURRENT_DATE AND status != 'COMPLETED'");
+            ps.setInt(1, userId);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) count = rs.getInt(1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
+
+    public List<Task> getTasksByUser(int userId) {
+        List<Task> tasks = new ArrayList<>();
+        String sql = "SELECT * FROM tasks WHERE assigned_to = ?";
+
+        try {
+
+            Connection conn = DBConnection.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, userId);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Task task = new Task();
+                task.setTaskId(rs.getInt("task_id"));
+                task.setTitle(rs.getString("title"));
+                task.setDescription(rs.getString("description"));
+                task.setProjectId(rs.getInt("project_id"));
+                task.setAssignedTo(rs.getInt("assigned_to"));
+                task.setCreatedBy(rs.getInt("created_by"));
+                task.setCreatedAt(rs.getTimestamp("created_at"));
+                task.setDeadline(rs.getTimestamp("deadline"));
+                task.setPriority(rs.getString("priority"));
+                task.setStatus(rs.getString("status"));
+                task.setLastUpdated(rs.getTimestamp("last_updated"));
+                tasks.add(task);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return tasks;
+    }
+
 
 
 }

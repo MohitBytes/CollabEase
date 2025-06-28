@@ -18,7 +18,7 @@ public class TeamServlet extends HttpServlet {
 
         TeamDAO teamDAO = new TeamDAO();
         request.setAttribute("teams", teamDAO.getTeamsByManager(user.getUserId()));
-        request.getRequestDispatcher("../Manager/teams.jsp").forward(request, response);
+        request.getRequestDispatcher("/Manager/teams.jsp").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
