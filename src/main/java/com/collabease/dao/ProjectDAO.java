@@ -2,6 +2,7 @@ package com.collabease.dao;
 
 import com.collabease.db.DBConnection;
 import com.collabease.model.Project;
+import com.collabease.model.ProjectProgress;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -210,8 +211,9 @@ public class ProjectDAO {
         return projects;
     }
 
-    public Map<String, Double> getUserProjectProgress(int userId) {
-        Map<String, Double> progressMap = new HashMap<>();
+    public List<ProjectProgress> getUserProjectProgress(int userId) {
+        List<ProjectProgress> progressList = new ArrayList<>();
+
         String sql =
                 "SELECT p.project_name, " +
                         "SUM(CASE WHEN t.status = 'COMPLETED' THEN 1 ELSE 0 END) AS completed_tasks, " +
@@ -226,25 +228,24 @@ public class ProjectDAO {
             Connection con = DBConnection.getConnection();
             PreparedStatement stmt = con.prepareStatement(sql);
             stmt.setInt(1, userId);
-            try (ResultSet rs = stmt.executeQuery()) {
-                while (rs.next()) {
-                    String projectName = rs.getString("project_name");
-                    int completedTasks = rs.getInt("completed_tasks");
-                    int totalTasks = rs.getInt("total_tasks");
+            ResultSet rs = stmt.executeQuery();
 
-                    double progress = (totalTasks > 0)
-                            ? (completedTasks * 100.0 / totalTasks)
-                            : 0.0;
+            while (rs.next()) {
+                String projectName = rs.getString("project_name");
+                int completed = rs.getInt("completed_tasks");
+                int total = rs.getInt("total_tasks");
 
-                    progressMap.put(projectName, progress);
-                }
+                ProjectProgress progress = new ProjectProgress(projectName, completed, total);
+                progressList.add(progress);
             }
-        } catch (SQLException e) {
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return progressMap;
+        return progressList;
     }
+
 
     public void updateProject(int projectId, String projectName) {
         String sql = "UPDATE projects SET projectName = ? WHERE projectId = ?";
