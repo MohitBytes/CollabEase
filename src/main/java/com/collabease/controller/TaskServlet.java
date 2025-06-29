@@ -30,7 +30,7 @@ public class TaskServlet extends HttpServlet {
         UserDAO userDAO = new UserDAO();
         request.setAttribute("users", userDAO.getAllMembers());
 
-        request.getRequestDispatcher("../Manager/tasks.jsp").forward(request, response);
+        request.getRequestDispatcher("/Manager/tasks.jsp").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
