@@ -283,7 +283,7 @@
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title"><i class="fas fa-users me-2"></i>Team List</h3>
-                <a href="CreateTeamServlet" class="create-btn">
+                <a href="TeamServlet" class="create-btn">
                     <i class="fas fa-plus me-2"></i> Create New Team
                 </a>
             </div>
@@ -329,10 +329,10 @@
                                             </div>
                                         </td>
                                         <td class="action-buttons">
-                                            <a href="EditTeamServlet?id=${team.teamId}" class="btn btn-sm btn-warning action-btn">
+                                            <a href="EditEntityServlet?type=team&id=${team.teamId}" class="btn btn-sm btn-warning action-btn">
                                                 <i class="fas fa-edit me-1"></i> Edit
                                             </a>
-                                            <a href="DeleteTeamServlet?id=${team.teamId}" class="btn btn-sm btn-danger action-btn"
+                                            <a href="DeleteEntityServlet?type=team&id=${team.teamId}" class="btn btn-sm btn-danger action-btn"
                                                onclick="return confirm('Are you sure you want to delete this team?');">
                                                 <i class="fas fa-trash me-1"></i> Delete
                                             </a>

@@ -246,10 +246,10 @@
                                         <td>${user.email}</td>
                                         <td>${user.role}</td>
                                         <td class="action-buttons">
-                                            <a href="EditUserServlet?id=${user.userId}" class="btn btn-sm btn-warning action-btn">
+                                            <a href="EditEntityServlet?type=user&id=${user.userId}" class="btn btn-sm btn-warning action-btn">
                                                 <i class="fas fa-edit me-1"></i> Edit
                                             </a>
-                                            <a href="DeleteUserServlet?id=${user.userId}" class="btn btn-sm btn-danger action-btn"
+                                            <a href="DeleteEntityServlet?type=user&id=${user.userId}" class="btn btn-sm btn-danger action-btn"
                                                onclick="return confirm('Are you sure you want to delete this user?');">
                                                 <i class="fas fa-trash me-1"></i> Delete
                                             </a>

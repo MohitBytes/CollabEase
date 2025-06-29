@@ -93,7 +93,7 @@ public class TeamDAO {
     }
 
     public void updateTeam(int teamId, String teamName) {
-        String sql = "UPDATE teams SET teamName = ? WHERE teamId = ?";
+        String sql = "UPDATE teams SET team_name = ? WHERE team_id = ?";
         try {
 
             Connection conn = DBConnection.getConnection();
@@ -109,7 +109,7 @@ public class TeamDAO {
 
     public Team getTeamById(int id) {
         Team team = null;
-        String sql = "SELECT * FROM teams WHERE teamId = ?";
+        String sql = "SELECT * FROM teams WHERE team_id = ?";
 
         try {
 
@@ -120,9 +120,9 @@ public class TeamDAO {
 
             if (rs.next()) {
                 team = new Team();
-                team.setTeamId(rs.getInt("teamId"));
-                team.setTeamName(rs.getString("teamName"));
-                team.setManagerId(rs.getInt("manager_id")); // if createdBy is a string (e.g., user email or username)
+                team.setTeamId(rs.getInt("team_id"));
+                team.setTeamName(rs.getString("team_name"));
+                team.setManagerId(rs.getInt("manager_id"));
             }
 
         } catch (SQLException e) {
@@ -130,5 +130,19 @@ public class TeamDAO {
         }
         return team;
     }
+
+    public void deleteTeam(int teamId) {
+        String sql = "DELETE FROM teams WHERE team_id = ?";
+        try {
+
+            Connection conn = DBConnection.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, teamId);
+            stmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }

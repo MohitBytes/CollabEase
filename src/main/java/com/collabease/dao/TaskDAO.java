@@ -320,17 +320,18 @@ public class TaskDAO {
         return tasks;
     }
 
-    public void updateTask(int taskId, String title, String assignedTo, String status, java.sql.Date deadline) {
-        String sql = "UPDATE tasks SET title = ?, assignedTo = ?, status = ?, deadline = ? WHERE taskId = ?";
+    public void updateTask(int taskId, String title, int assignedTo, String status, Timestamp deadline, String description) {
+        String sql = "UPDATE tasks SET title = ?, description = ?, assigned_to = ?, status = ?, deadline = ? WHERE task_id = ?";
         try {
 
             Connection conn = DBConnection.getConnection();
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, title);
-            stmt.setString(2, assignedTo);
-            stmt.setString(3, status);
-            stmt.setDate(4, deadline);
-            stmt.setInt(5, taskId);
+            stmt.setString(2, description);
+            stmt.setInt(3, assignedTo);
+            stmt.setString(4, status);
+            stmt.setTimestamp(5, deadline);
+            stmt.setInt(6, taskId);
             stmt.executeUpdate();
 
         } catch (SQLException ex) {
@@ -340,7 +341,7 @@ public class TaskDAO {
 
     public Task getTaskById(int id) {
         Task task = null;
-        String sql = "SELECT * FROM tasks WHERE taskId = ?";
+        String sql = "SELECT * FROM tasks WHERE task_id = ?";
 
         try {
 
@@ -351,7 +352,7 @@ public class TaskDAO {
 
             if (rs.next()) {
                 task = new Task();
-                task.setTaskId(rs.getInt("taskId"));
+                task.setTaskId(rs.getInt("task_id"));
                 task.setTitle(rs.getString("title"));
                 task.setDescription(rs.getString("description"));
                 task.setProjectId(rs.getInt("project_id"));
@@ -359,7 +360,7 @@ public class TaskDAO {
                 task.setCreatedBy(rs.getInt("created_by"));
                 task.setCreatedAt(rs.getTimestamp("created_at"));
                 task.setStatus(rs.getString("status"));
-                task.setDeadline(rs.getTimestamp("deadline"));
+                task.setPriority(rs.getString("priority"));
                 task.setDeadline(rs.getTimestamp("deadline"));
             }
 
@@ -449,6 +450,19 @@ public class TaskDAO {
         }
 
         return tasks;
+    }
+
+    public void deleteTask(int taskId) {
+        String sql = "DELETE FROM tasks WHERE task_id = ?";
+        try {
+
+            Connection conn = DBConnection.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, taskId);
+            stmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 

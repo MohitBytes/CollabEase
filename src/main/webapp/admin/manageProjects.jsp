@@ -238,10 +238,10 @@
                                         <td>${project.projectName}</td>
                                         <td><fmt:formatDate value="${project.createdAt}" pattern="dd MMM yyyy" /></td>
                                         <td class="action-buttons">
-                                            <a href="EditEntityServlet?id=${project.projectId}" class="btn btn-sm btn-warning action-btn">
+                                            <a href="EditEntityServlet?type=project&id=${project.projectId}" class="btn btn-sm btn-warning action-btn">
                                                 <i class="fas fa-edit me-1"></i> Edit
                                             </a>
-                                            <a href="DeleteEntityServlet?id=${project.projectId}" class="btn btn-sm btn-danger action-btn"
+                                            <a href="DeleteEntityServlet?type=project&id=${project.projectId}" class="btn btn-sm btn-danger action-btn"
                                                onclick="return confirm('Are you sure you want to delete this project?');">
                                                 <i class="fas fa-trash me-1"></i> Delete
                                             </a>

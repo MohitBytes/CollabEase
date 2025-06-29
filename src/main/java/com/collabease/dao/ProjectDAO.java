@@ -248,7 +248,7 @@ public class ProjectDAO {
 
 
     public void updateProject(int projectId, String projectName) {
-        String sql = "UPDATE projects SET projectName = ? WHERE projectId = ?";
+        String sql = "UPDATE projects SET project_name = ?,description = ?, deadline = ?, status = ?, team_id = ? WHERE project_id = ?";
         try {
 
             Connection conn = DBConnection.getConnection();
@@ -264,7 +264,7 @@ public class ProjectDAO {
 
     public Project getProjectById(int id) {
         Project project = null;
-        String sql = "SELECT * FROM projects WHERE projectId = ?";
+        String sql = "SELECT * FROM projects WHERE project_id = ?";
 
         try {
 
@@ -281,7 +281,7 @@ public class ProjectDAO {
                 project.setTeamId(rs.getInt("team_id"));
                 project.setDeadline(rs.getDate("deadline"));
                 project.setStatus(rs.getString("status"));
-                project.setCreatedAt(rs.getTimestamp("createdAt"));
+                project.setCreatedAt(rs.getTimestamp("created_at"));
             }
 
         } catch (SQLException e) {
@@ -289,5 +289,19 @@ public class ProjectDAO {
         }
         return project;
     }
+
+    public void deleteProject(int projectId) {
+        String sql = "DELETE FROM projects WHERE project_id = ?";
+        try {
+
+            Connection conn = DBConnection.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, projectId);
+            stmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }

@@ -330,10 +330,10 @@
                                             </c:choose>
                                         </td>
                                         <td class="action-buttons">
-                                            <a href="EditTaskServlet?id=${task.taskId}" class="btn btn-sm btn-warning action-btn">
+                                            <a href="EditEntityServlet?type=task&id=${task.taskId}" class="btn btn-sm btn-warning action-btn">
                                                 <i class="fas fa-edit me-1"></i> Edit
                                             </a>
-                                            <a href="DeleteTaskServlet?id=${task.taskId}" class="btn btn-sm btn-danger action-btn"
+                                            <a href="DeleteEntityServlet?type=task&id=${task.taskId}" class="btn btn-sm btn-danger action-btn"
                                                onclick="return confirm('Are you sure you want to delete this task?');">
                                                 <i class="fas fa-trash me-1"></i> Delete
                                             </a>

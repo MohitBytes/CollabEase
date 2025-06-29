@@ -12,7 +12,7 @@ import com.collabease.model.User;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import java.io.IOException;
-
+import java.sql.Timestamp;
 
 public class EditEntityServlet extends HttpServlet {
 
@@ -20,7 +20,20 @@ public class EditEntityServlet extends HttpServlet {
             throws ServletException, IOException {
 
         String type = request.getParameter("type");
-        int id = Integer.parseInt(request.getParameter("id"));
+        String idParam = request.getParameter("id");
+
+        if (type == null || idParam == null) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Missing 'type' or 'id' parameter.");
+            return;
+        }
+
+        int id;
+        try {
+            id = Integer.parseInt(idParam);
+        } catch (NumberFormatException e) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "'id' must be a valid number.");
+            return;
+        }
 
         switch (type) {
             case "project":
@@ -57,45 +70,83 @@ public class EditEntityServlet extends HttpServlet {
             throws ServletException, IOException {
 
         String type = request.getParameter("type");
+        String idParam = request.getParameter("id");
+
+        if (type == null || idParam == null) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Missing 'type' or 'id' parameter.");
+            return;
+        }
+
+        int id;
+        try {
+            id = Integer.parseInt(idParam);
+        } catch (NumberFormatException e) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "'id' must be a valid number.");
+            return;
+        }
 
         switch (type) {
             case "project":
-                int projectId = Integer.parseInt(request.getParameter("id"));
                 String projectName = request.getParameter("name");
-                new ProjectDAO().updateProject(projectId, projectName);
+                if (projectName == null || projectName.trim().isEmpty()) {
+                    response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Project name cannot be empty.");
+                    return;
+                }
+                new ProjectDAO().updateProject(id, projectName);
                 response.sendRedirect("ManageSection?type=projects");
                 break;
 
             case "team":
-                int teamId = Integer.parseInt(request.getParameter("id"));
                 String teamName = request.getParameter("name");
-                new TeamDAO().updateTeam(teamId, teamName);
+                if (teamName == null || teamName.trim().isEmpty()) {
+                    response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Team name cannot be empty.");
+                    return;
+                }
+                new TeamDAO().updateTeam(id, teamName);
                 response.sendRedirect("ManageSection?type=teams");
                 break;
 
             case "user":
-                int userId = Integer.parseInt(request.getParameter("id"));
                 String fullName = request.getParameter("fullName");
                 String email = request.getParameter("email");
                 String role = request.getParameter("role");
-                new UserDAO().updateUser(userId, fullName, email, role);
+                if (fullName == null || email == null || role == null) {
+                    response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Missing user details.");
+                    return;
+                }
+                new UserDAO().updateUser(id, fullName, email, role);
                 response.sendRedirect("ManageSection?type=users");
                 break;
 
             case "task":
-                int taskId = Integer.parseInt(request.getParameter("id"));
                 String title = request.getParameter("title");
-                String assignedTo = request.getParameter("assignedTo");
+                String description = request.getParameter("description");
                 String status = request.getParameter("status");
                 String deadlineStr = request.getParameter("deadline");
-                java.sql.Date deadline = java.sql.Date.valueOf(deadlineStr);
-                new TaskDAO().updateTask(taskId, title, assignedTo, status, deadline);
+
+                int assignedTo;
+                try {
+                    assignedTo = Integer.parseInt(request.getParameter("assignedTo"));
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                    response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid assignedTo value.");
+                    return;
+                }
+
+                Timestamp deadline;
+                try {
+                    // deadlineStr = yyyy-MM-dd --> convert to yyyy-MM-dd 00:00:00
+                    deadline = Timestamp.valueOf(deadlineStr + " 00:00:00");
+                } catch (IllegalArgumentException e) {
+                    e.printStackTrace();
+                    response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Invalid deadline format.");
+                    return;
+                }
+
+                new TaskDAO().updateTask(id, title, assignedTo, status, deadline, description);
                 response.sendRedirect("ManageSection?type=tasks");
                 break;
 
-            default:
-                response.sendRedirect("adminDashboard.jsp");
-                break;
         }
     }
 }

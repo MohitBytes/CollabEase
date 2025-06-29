@@ -150,7 +150,7 @@ public class UserDAO {
 
     public User getUserById(int id) {
         User user = null;
-        String sql = "SELECT * FROM users WHERE userId = ?";
+        String sql = "SELECT * FROM users WHERE user_id = ?";
 
         try {
 
@@ -172,6 +172,20 @@ public class UserDAO {
         }
         return user;
     }
+
+    public void deleteUser(int userId) {
+        String sql = "DELETE FROM users WHERE user_id = ?";
+        try {
+
+            Connection conn = DBConnection.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, userId);
+            stmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
 
 }
