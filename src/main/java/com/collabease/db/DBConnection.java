@@ -16,7 +16,7 @@ public class DBConnection {
                 Class.forName("com.mysql.cj.jdbc.Driver");
                 String url = "jdbc:mysql://localhost:3306/collabease_db?allowPublicKeyRetrieval=true&useSSL=false";
                 String user = "root";
-                String password = "Mohit@2004";
+                String password = "your_password";
                 con = DriverManager.getConnection(url, user, password);
             } catch (Exception e) {
                 e.printStackTrace();
