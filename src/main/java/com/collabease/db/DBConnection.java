@@ -14,9 +14,15 @@ public class DBConnection {
         if (con == null) {
             try {
                 Class.forName("com.mysql.cj.jdbc.Driver");
-                String url = "jdbc:mysql://localhost:3306/collabease_db?allowPublicKeyRetrieval=true&useSSL=false";
-                String user = "root";
-                String password = "your_password";
+                
+                // Use environment variables with fallback to default values
+                String host = System.getenv("DB_HOST") != null ? System.getenv("DB_HOST") : "localhost";
+                String port = System.getenv("DB_PORT") != null ? System.getenv("DB_PORT") : "3306";
+                String dbName = System.getenv("DB_NAME") != null ? System.getenv("DB_NAME") : "collabease_db";
+                String user = System.getenv("DB_USER") != null ? System.getenv("DB_USER") : "root";
+                String password = System.getenv("DB_PASSWORD") != null ? System.getenv("DB_PASSWORD") : "your_password";
+                
+                String url = "jdbc:mysql://" + host + ":" + port + "/" + dbName + "?allowPublicKeyRetrieval=true&useSSL=false";
                 con = DriverManager.getConnection(url, user, password);
             } catch (Exception e) {
                 e.printStackTrace();

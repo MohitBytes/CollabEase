@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: collabease-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: collabease123
+      MYSQL_DATABASE: collabease_db
+      MYSQL_USER: collabease
+      MYSQL_PASSWORD: collabease123
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./src/SQL/schemas:/docker-entrypoint-initdb.d/init.sql:ro
+    restart: unless-stopped
+    networks:
+      - collabease-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
+  app:
+    build: .
+    container_name: collabease-app
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_NAME: collabease_db
+      DB_USER: collabease
+      DB_PASSWORD: collabease123
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+    networks:
+      - collabease-network
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8080/ || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+volumes:
+  mysql_data:
+
+networks:
+  collabease-network:
+    driver: bridge

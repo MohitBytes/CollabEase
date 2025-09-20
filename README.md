@@ -55,9 +55,9 @@ CollabEase is a comprehensive team collaboration web application that brings tea
   - Font Awesome for icons
   - Google Fonts (Poppins)
 
-## 📋 Prerequisites
+#### Prerequisites for Manual Setup
 
-Before running CollabEase, ensure you have the following installed:
+Before running CollabEase manually, ensure you have:
 
 - **Java Development Kit (JDK) 17 or higher**
 - **Apache Maven 3.6+**
@@ -66,6 +66,28 @@ Before running CollabEase, ensure you have the following installed:
 - **Web Browser** (Chrome, Firefox, Safari, Edge)
 
 ## 🚀 Getting Started
+
+### Quick Start with Docker (Recommended)
+
+The fastest way to get CollabEase running is with Docker:
+
+```bash
+# Clone the repository
+git clone https://github.com/MohitBytes/CollabEase.git
+cd CollabEase
+
+# Start the application (includes database setup)
+docker compose up -d
+
+# Access the application
+open http://localhost:8080
+```
+
+That's it! The application will be running with a fully configured MySQL database.
+
+### Manual Setup (Traditional)
+
+If you prefer manual setup or don't have Docker:
 
 ### 1. Clone the Repository
 
@@ -123,6 +145,41 @@ mvn clean package
    ```
 
 3. Access the application at: `http://localhost:8080/CollabEase`
+
+## 🌐 Deployment Options
+
+### 🐳 Docker Deployment (Recommended)
+
+For the easiest deployment experience, see our [**Deployment Guide**](DEPLOYMENT.md) which includes:
+
+- **One-click local deployment** with Docker Compose
+- **Cloud deployment** instructions for major platforms (AWS, GCP, Azure, Heroku, Railway, Render)
+- **Environment configuration** options
+- **Production deployment** considerations
+
+### 🏗️ Build from Source
+
+If you want to build the application yourself:
+
+```bash
+# Build the WAR file and Docker image
+./build.sh
+
+# Or manually:
+mvn clean package -DskipTests
+docker build -t collabease .
+```
+
+### ☁️ Cloud Deployment
+
+Deploy to popular cloud platforms:
+
+- **Heroku**: `git push heroku main` (using included heroku.yml)
+- **Railway**: Connect your GitHub repo and deploy automatically
+- **Render**: Connect your GitHub repo for continuous deployment
+- **AWS/GCP/Azure**: Use Docker containers with the provided configuration
+
+See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed instructions.
 
 ## 📁 Project Structure
 

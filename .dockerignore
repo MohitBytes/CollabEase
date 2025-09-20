@@ -1,0 +1,29 @@
+# Git
+.git
+.gitignore
+
+# IDE
+.idea
+.smarttomcat
+*.iml
+
+# Source code (we only need the built WAR)
+src
+pom.xml
+README.md
+DEPLOYMENT.md
+
+# Build artifacts except the final WAR
+target/*
+!target/CollabEase.war
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker files
+docker-compose.yml
+.dockerignore
