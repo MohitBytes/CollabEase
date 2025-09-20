@@ -1,4 +1,4 @@
-CREATE DATABASE collabease_db;
+CREATE DATABASE IF NOT EXISTS collabease_db;
 USE collabease_db;
 
 -- Users Table

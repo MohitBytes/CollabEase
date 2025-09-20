@@ -22,9 +22,31 @@ public class DBConnection {
                 String user = System.getenv("DB_USER") != null ? System.getenv("DB_USER") : "root";
                 String password = System.getenv("DB_PASSWORD") != null ? System.getenv("DB_PASSWORD") : "your_password";
                 
-                String url = "jdbc:mysql://" + host + ":" + port + "/" + dbName + "?allowPublicKeyRetrieval=true&useSSL=false";
-                con = DriverManager.getConnection(url, user, password);
+                String url = "jdbc:mysql://" + host + ":" + port + "/" + dbName + 
+                    "?allowPublicKeyRetrieval=true&useSSL=false&autoReconnect=true&failOverReadOnly=false&maxReconnects=10";
+                
+                // Retry connection up to 10 times with 2 second delays
+                for (int i = 0; i < 10; i++) {
+                    try {
+                        con = DriverManager.getConnection(url, user, password);
+                        if (con != null) {
+                            System.out.println("Database connection established successfully!");
+                            break;
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Database connection attempt " + (i + 1) + " failed: " + e.getMessage());
+                        if (i < 9) { // Don't sleep on the last attempt
+                            try {
+                                Thread.sleep(2000); // Wait 2 seconds before retry
+                            } catch (InterruptedException ie) {
+                                Thread.currentThread().interrupt();
+                                break;
+                            }
+                        }
+                    }
+                }
             } catch (Exception e) {
+                System.err.println("Database connection failed: " + e.getMessage());
                 e.printStackTrace();
             }
         }
