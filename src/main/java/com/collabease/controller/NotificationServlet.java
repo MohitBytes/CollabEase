@@ -4,9 +4,9 @@ import com.collabease.dao.NotificationDAO;
 import com.collabease.model.Notification;
 import com.collabease.model.User;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.*;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;

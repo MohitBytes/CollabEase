@@ -5,8 +5,8 @@ import com.collabease.dao.TaskDAO;
 import com.collabease.dao.TeamDAO;
 import com.collabease.dao.UserDAO;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.*;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.*;
 import java.io.IOException;
 
 public class DeleteEntityServlet extends HttpServlet {

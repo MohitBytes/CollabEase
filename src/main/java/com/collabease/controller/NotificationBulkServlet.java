@@ -3,8 +3,8 @@ package com.collabease.controller;
 import com.collabease.dao.NotificationDAO;
 import com.collabease.model.User;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.*;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.*;
 import java.io.IOException;
 
 public class NotificationBulkServlet extends HttpServlet {

@@ -4,8 +4,8 @@ import com.collabease.dao.NotificationDAO;
 import com.collabease.model.Notification;
 import com.collabease.model.User;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
+import jakarta.servlet.*;
+import jakarta.servlet.http.*;
 import java.io.IOException;
 import java.util.List;
 

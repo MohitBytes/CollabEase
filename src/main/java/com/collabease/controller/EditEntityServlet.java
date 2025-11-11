@@ -9,8 +9,8 @@ import com.collabease.model.Task;
 import com.collabease.model.Team;
 import com.collabease.model.User;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.*;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.*;
 import java.io.IOException;
 import java.sql.Timestamp;
 

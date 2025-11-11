@@ -4,9 +4,9 @@ import com.collabease.dao.CommentDAO;
 import com.collabease.model.Comment;
 import com.collabease.model.User;
 
-import javax.servlet.*;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.*;
+import jakarta.servlet.*;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.*;
 import java.io.IOException;
 
 public class CommentServlet extends HttpServlet {

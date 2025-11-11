@@ -4,7 +4,7 @@ import com.collabease.db.DBConnection;
 import com.collabease.model.User;
 import com.collabease.utils.PasswordUtil;
 
-import javax.servlet.annotation.MultipartConfig;
+import jakarta.servlet.annotation.MultipartConfig;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
