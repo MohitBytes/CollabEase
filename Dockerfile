@@ -1,30 +1,25 @@
-# ======================
-# Stage 1 — Build WAR file
-# ======================
+# Stage 1: Build the WAR file using Maven
 FROM maven:3.9.9-eclipse-temurin-17 AS build
 WORKDIR /app
 
-# Copy pom.xml and source
+# Copy Maven config and source
 COPY pom.xml .
 COPY src ./src
 
-# Build the WAR file (skip tests)
+# Build the WAR (skip tests for speed)
 RUN mvn clean package -DskipTests
 
-# ======================
-# Stage 2 — Run on Tomcat
-# ======================
-FROM eclipse-temurin:17-jdk-jammy
+# Stage 2: Run the built WAR using Tomcat (preinstalled)
+FROM tomcat:10.1-jdk17-temurin
 
-# Install Tomcat
-RUN apt-get update && apt-get install -y wget unzip \
-    && wget https://downloads.apache.org/tomcat/tomcat-10/v10.1.31/bin/apache-tomcat-10.1.31.zip -O /tmp/tomcat.zip \
-    && unzip /tmp/tomcat.zip -d /opt \
-    && mv /opt/apache-tomcat-10.1.31 /opt/tomcat \
-    && rm /tmp/tomcat.zip
+# Remove the default ROOT webapp
+RUN rm -rf /usr/local/tomcat/webapps/ROOT
 
-# Copy the built WAR file from the previous stage
-COPY --from=build /app/target/CollabEase.war /opt/tomcat/webapps/
+# Copy WAR file from build stage to Tomcat webapps
+COPY --from=build /app/target/CollabEase.war /usr/local/tomcat/webapps/ROOT.war
 
+# Expose port 8080 for Render
 EXPOSE 8080
-CMD ["/opt/tomcat/bin/catalina.sh", "run"]
+
+# Start Tomcat
+CMD ["catalina.sh", "run"]
