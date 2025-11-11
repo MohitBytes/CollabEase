@@ -8,7 +8,7 @@ WORKDIR /app
 COPY pom.xml .
 COPY src ./src
 
-# Build the WAR file (skip tests for speed)
+# Build the WAR file (skip tests)
 RUN mvn clean package -DskipTests
 
 # ======================
@@ -18,12 +18,12 @@ FROM eclipse-temurin:17-jdk-jammy
 
 # Install Tomcat
 RUN apt-get update && apt-get install -y wget unzip \
-    && wget https://dlcdn.apache.org/tomcat/tomcat-10/v10.1.30/bin/apache-tomcat-10.1.30.zip -O /tmp/tomcat.zip \
+    && wget https://downloads.apache.org/tomcat/tomcat-10/v10.1.31/bin/apache-tomcat-10.1.31.zip -O /tmp/tomcat.zip \
     && unzip /tmp/tomcat.zip -d /opt \
-    && mv /opt/apache-tomcat-10.1.30 /opt/tomcat \
+    && mv /opt/apache-tomcat-10.1.31 /opt/tomcat \
     && rm /tmp/tomcat.zip
 
-# Copy WAR from build stage
+# Copy the built WAR file from the previous stage
 COPY --from=build /app/target/CollabEase.war /opt/tomcat/webapps/
 
 EXPOSE 8080
